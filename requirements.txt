@@ -1,5 +1,5 @@
 numpy
 scipy
 pandas
-argparse
-pycvf
+PyVCF3
+flask

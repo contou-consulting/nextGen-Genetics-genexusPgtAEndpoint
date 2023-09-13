@@ -91,18 +91,14 @@ def find_cytoband_range(chr, start, end, df):
     s2 = df[c2]['band'].values[-1]
     return ''.join([chr, s1, s2])
 
-def run(args):
-    '''
-    Runs the application
-    '''
+def translate_vcf(cytobandFile, inFile):
     # Read cytoband information
     print('Reading cytobands files')
-    cyto = read_cytoband(args.cytoband)
-    #print(cyto)
+    cyto = read_cytoband(cytobandFile)
 
     # read vcf file info
     print('Reading vcf files')
-    df = read_vcf(args.infile)
+    df = read_vcf([inFile])
     #print(df)
 
     # read vcf information
@@ -112,21 +108,6 @@ def run(args):
     df['cytoband'] = out
     #print(df)
     #df = df.drop(columns=['filename','start','end'])
-    cols = ['chromosome','start','end','length','ploidy','cytoband']
-    df[cols].to_csv(args.outfile, index=False, sep='\t')
+    return df;
 
-def main():
-    parser = argparse.ArgumentParser(description='Merges vcf information with cytoband information')
-    parser.add_argument('-i', dest='infile', type=str, nargs='+', help='vcf files')
-    parser.add_argument('-c', dest='cytoband', type=str, help='cytoband file')
-    parser.add_argument('-o', dest='outfile', type=str, help='output file name')
-
-    # parse arguments
-    args = parser.parse_args()
-
-    # run the application
-    run(args)
-
-if __name__ == '__main__':
-    main()
 
