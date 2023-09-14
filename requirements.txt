@@ -3,3 +3,4 @@ scipy
 pandas
 PyVCF3
 flask
+flask_httpauth

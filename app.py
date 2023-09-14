@@ -9,17 +9,18 @@ auth = HTTPBasicAuth()
 users = {
     "admin": "123456"
 }
+
 @auth.verify_password
 def verify_password(username, password):
     if username in users and users[username] == password:
         return username
     
-@app.route('/ls/health/', methods=['GET'])
-def get_data():
+@app.route('/ls/health', methods=['GET'])
+def health_check():
     return Response("Healthy", 200)
 
 
-@app.route('/ls/getPgtAData/', methods=['GET'])
+@app.route('/ls/getPgtAData', methods=['GET'])
 @auth.login_required
 def get_data():
     base_vcf_file_path = os.path.normpath(request.json.get('outputsDir'))
@@ -35,4 +36,4 @@ def get_data():
         return Response("Resource not found",404)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)

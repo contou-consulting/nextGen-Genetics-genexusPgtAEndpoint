@@ -4,5 +4,6 @@
 
 /.vs
 testData/CnvActor-00/mosaic/*
-*.zip
+*.tar
 /__pycache__
+genexus-pgta-endpoint.tar
