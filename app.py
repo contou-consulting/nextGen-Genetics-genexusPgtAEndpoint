@@ -6,8 +6,12 @@ import os
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
+# Access credentials from environment variables
+USERNAME = os.environ.get('FLASK_APP_USERNAME', 'admin') # default to 'admin' if not set
+PASSWORD = os.environ.get('FLASK_APP_PASSWORD', '123456') # default to '123456' if not set
+
 users = {
-    "admin": "123456"
+    USERNAME: PASSWORD
 }
 
 @auth.verify_password
@@ -15,11 +19,12 @@ def verify_password(username, password):
     if username in users and users[username] == password:
         return username
     
+@app.route('/ls/health/', methods=['GET'])
 @app.route('/ls/health', methods=['GET'])
 def health_check():
     return Response("Healthy", 200)
 
-
+@app.route('/ls/getPgtAData/', methods=['GET'])
 @app.route('/ls/getPgtAData', methods=['GET'])
 @auth.login_required
 def get_data():

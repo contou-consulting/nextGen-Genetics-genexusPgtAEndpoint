@@ -15,7 +15,8 @@ EXPOSE 5000
 
 # Define environment variable for Flask to run in production
 ENV FLAST_APP=app.py
-ENV FLASK_ENV=production
-
+ENV FLASK_ENV=development 
+ENV FLASK_APP_USERNAME=admin
+ENV FLASK_APP_PASSWORD=123456
 # Run app.py when the container launches
 CMD ["flask", "run", "--host=0.0.0.0"]
