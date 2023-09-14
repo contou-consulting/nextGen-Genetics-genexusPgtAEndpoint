@@ -11,7 +11,7 @@ USERNAME = os.environ.get('FLASK_APP_USERNAME', 'admin') # default to 'admin' if
 PASSWORD = os.environ.get('FLASK_APP_PASSWORD', '123456') # default to '123456' if not set
 
 users = {
-    USERNAME: PASSWORD
+    USERNAME:PASSWORD
 }
 
 @auth.verify_password
@@ -29,16 +29,16 @@ def health_check():
 @auth.login_required
 def get_data():
     current_directory = os.path.dirname(os.path.abspath(__file__))
-    
     base_vcf_file_path = os.path.normpath(request.json.get('outputsDir'))
-    if base_vcf_file_path is not None and base_vcf_file_path != '':
-        vcf_file_path = os.path.join("data",base_vcf_file_path,"CnvActor-00","mosaic","CN_Segments.vcf")
-    else:
-        vcf_file_path = os.path.join("data","CnvActor-00","mosaic","CN_Segments.vcf")
 
+    if base_vcf_file_path is not None and base_vcf_file_path != '':
+        vcf_file_path = os.path.join("data/",base_vcf_file_path,"CnvActor-00/","mosaic/","CN_Segments.vcf")
+    else:
+        vcf_file_path = os.path.join("data/","CnvActor-00/","mosaic/","CN_Segments.vcf")
 
     cytoband_file_path = os.path.join(current_directory, 'cytoBand.txt')
-    vcf_file_path = os.path.join(current_directory, vcf_file_path)
+    # FYI, if the passed value in the JSON starts with a '/' then it will ignore all of this and just use the provided value
+    vcf_file_path = os.path.normpath(os.path.join(current_directory, vcf_file_path))
 
     try:
         df = translate_vcf(cytoband_file_path,vcf_file_path)
