@@ -38,7 +38,7 @@ def get_data():
         df = translate_vcf(cytoband_file_path,vcf_file_path)
         return Response(df.to_csv(index=False, sep='\t'), mimetype="text/tab-separated-values")
     except FileNotFoundError:
-        return Response("Resource not found",404)
+        return Response("VCF not found at " + vcf_file_path,404)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000)
