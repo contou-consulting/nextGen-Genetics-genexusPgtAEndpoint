@@ -1,0 +1,7 @@
+/.vs
+/testData/CnvActor-00/mosaic/*
+/__pycache__
+/.git
+/.vscode
+
+*.tar

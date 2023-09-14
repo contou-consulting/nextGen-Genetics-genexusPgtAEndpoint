@@ -3,7 +3,7 @@
 ################################################################################
 
 /.vs
-testData/CnvActor-00/mosaic/*
-*.tar
+/testData/CnvActor-00/mosaic/*
 /__pycache__
-genexus-pgta-endpoint.tar
+
+*.tar
