@@ -14,6 +14,10 @@ def verify_password(username, password):
     if username in users and users[username] == password:
         return username
     
+@app.route('/ls/health/', methods=['GET'])
+def get_data():
+    return Response("Healthy", 200)
+
 
 @app.route('/ls/getPgtAData/', methods=['GET'])
 @auth.login_required
