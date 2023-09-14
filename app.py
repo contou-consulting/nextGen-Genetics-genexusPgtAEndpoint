@@ -28,9 +28,15 @@ def health_check():
 @app.route('/ls/getPgtAData', methods=['GET'])
 @auth.login_required
 def get_data():
-    base_vcf_file_path = os.path.normpath(request.json.get('outputsDir'))
-    vcf_file_path = os.path.join(base_vcf_file_path,"CnvActor-00","mosaic","CN_Segments.vcf")
     current_directory = os.path.dirname(os.path.abspath(__file__))
+    
+    base_vcf_file_path = os.path.normpath(request.json.get('outputsDir'))
+    if base_vcf_file_path is not None and base_vcf_file_path != '':
+        vcf_file_path = os.path.join("data",base_vcf_file_path,"CnvActor-00","mosaic","CN_Segments.vcf")
+    else:
+        vcf_file_path = os.path.join("data","CnvActor-00","mosaic","CN_Segments.vcf")
+
+
     cytoband_file_path = os.path.join(current_directory, 'cytoBand.txt')
     vcf_file_path = os.path.join(current_directory, vcf_file_path)
 
