@@ -1,5 +1,5 @@
 # Import necessary libraries
-from flask import Flask, Response, abort, request
+from flask import Flask, Response, request
 from flask_httpauth import HTTPBasicAuth
 from vcf_functions import translate_vcf
 import os
@@ -47,4 +47,4 @@ def get_data():
         return Response("VCF not found at " + vcf_file_path,404)
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+    app.run(port=5000,ssl_context='adhoc')

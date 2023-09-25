@@ -15,8 +15,7 @@
             },
             "args": [
                 "run",
-                "--no-debugger",
-                "--no-reload"
+                "--cert=adhoc"
             ],
             "jinja": true,
             "justMyCode": true
